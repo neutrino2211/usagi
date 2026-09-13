@@ -12,12 +12,11 @@ type EntitiesResult = {
     }}
 }
 
-describe("Entities", () => {
+describe("Entities (Legacy)", () => {
     let instance: Instance;
 
     beforeEach(async () => {
         instance = new Instance("amqp://guest:guest@localhost:5672/");
-        // Wait a bit for RabbitMQ to be fully ready
         await new Promise(resolve => setTimeout(resolve, 1000));
     });
 
@@ -33,19 +32,11 @@ describe("Entities", () => {
         await broker.teardown();
     });
 
-    it("can call broker", async function() {
-        this.timeout(10000);
+    it.skip("can call broker (requires running service)", async function() {
         const broker = instance.createBroker<EntitiesResult>("entities");
         await broker.init();
-        // This will timeout since there's no entities service running,
-        // but it proves we can connect and send messages
-        try {
-            const result = await broker.call("identify", { text: "I was with Taylor Swift the other day" });
-            expect(result).toBeDefined();
-        } catch (e) {
-            // Expected to timeout since no service is listening
-            expect(e).toBeDefined();
-        }
+        const result = await broker.call("identify", { text: "I was with Taylor Swift the other day" });
+        expect(result).toBeDefined();
         await broker.teardown();
     });
 
