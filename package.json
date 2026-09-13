@@ -2,29 +2,40 @@
   "name": "usagi",
   "version": "1.0.0",
   "description": "The rabbitmq communication broker for all backend modules",
-  "main": "src/index.ts",
+  "main": "js/src/index.js",
+  "types": "js/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./js/src/index.d.ts",
+      "default": "./js/src/index.js"
+    }
+  },
+  "files": [
+    "js/src"
+  ],
   "scripts": {
+    "build": "tsc",
     "test": "pnpm test:docker:up && ts-mocha --type-check --exit tests/*.spec.ts; pnpm test:docker:down",
     "test:docker:up": "docker compose up -d --wait",
     "test:docker:down": "docker compose down -v",
-    "postinstall": "echo building usagi... && tsc"
+    "prepare": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/amqplib": "^0.10.1",
-    "@types/node": "^20.5.3",
-    "@types/uuid": "^9.0.2",
     "amqplib": "^0.10.3",
-    "typescript": "^5.1.6",
     "uuid": "^9.0.0",
     "zod": "^4.6.3"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.10.1",
     "@types/expect": "^24.3.0",
     "@types/mocha": "^10.0.1",
+    "@types/node": "^20.5.3",
+    "@types/uuid": "^9.0.2",
     "expect": "^29.6.3",
-    "ts-mocha": "^10.0.0"
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.1.6"
   }
 }

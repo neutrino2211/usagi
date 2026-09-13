@@ -8,21 +8,9 @@ importers:
 
   .:
     dependencies:
-      '@types/amqplib':
-        specifier: ^0.10.1
-        version: 0.10.8
-      '@types/node':
-        specifier: ^20.5.3
-        version: 20.19.43
-      '@types/uuid':
-        specifier: ^9.0.2
-        version: 9.0.8
       amqplib:
         specifier: ^0.10.3
         version: 0.10.9
-      typescript:
-        specifier: ^5.1.6
-        version: 5.9.3
       uuid:
         specifier: ^9.0.0
         version: 9.0.1
@@ -30,18 +18,30 @@ importers:
         specifier: ^4.6.3
         version: 4.6.3
     devDependencies:
+      '@types/amqplib':
+        specifier: ^0.10.1
+        version: 0.10.8
       '@types/expect':
         specifier: ^24.3.0
         version: 24.3.2
       '@types/mocha':
         specifier: ^10.0.1
         version: 10.0.10
+      '@types/node':
+        specifier: ^20.5.3
+        version: 20.19.43
+      '@types/uuid':
+        specifier: ^9.0.2
+        version: 9.0.8
       expect:
         specifier: ^29.6.3
         version: 29.7.0
       ts-mocha:
         specifier: ^10.0.0
         version: 10.1.0(mocha@11.8.0)
+      typescript:
+        specifier: ^5.1.6
+        version: 5.9.3
 
 packages:
 
