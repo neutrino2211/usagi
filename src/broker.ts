@@ -12,7 +12,7 @@ export class Broker {
 
     private replyQueue: string = "";
 
-    constructor(private connectionString: string, private module: string) {
+    constructor(private connectionString: string, private module: string, private socketOptions?: any) {
         this.replyQueue = this.module+":broker"
     }
 
@@ -26,7 +26,7 @@ export class Broker {
     }
 
     async init() {
-        this.connection = await amqp.connect(this.connectionString);
+        this.connection = await amqp.connect(this.connectionString, this.socketOptions);
         this.channel = await this.connection.createChannel();
         this.channel.assertQueue(this.replyQueue);
         await this.channel.consume(this.replyQueue, (msg) => {

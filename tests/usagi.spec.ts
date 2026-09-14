@@ -159,6 +159,17 @@ describe('ServiceRegistry', () => {
     await registry.teardown();
   });
 
+  it('accepts socket options for amqps connections', () => {
+    const tlsRegistry = new ServiceRegistry({
+      connectionString: 'amqps://guest:guest@localhost:5671/',
+      socketOptions: {
+        rejectUnauthorized: false,
+        ca: '-----BEGIN CERTIFICATE-----test-----END CERTIFICATE-----'
+      }
+    });
+    expect(tlsRegistry).toBeDefined();
+  });
+
   it('registers a service', () => {
     const router = t.router({
       test: t.procedure

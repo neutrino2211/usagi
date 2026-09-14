@@ -10,6 +10,7 @@ export interface ServiceDefinition {
 
 export interface PoolConfig {
   connectionString: string;
+  socketOptions?: any;
   poolSize?: number;
   timeout?: number;
 }
@@ -44,7 +45,7 @@ export class ServiceRegistry {
     const poolSize = this.config.poolSize || 1;
 
     for (let i = 0; i < poolSize; i++) {
-      const connection = await amqp.connect(this.config.connectionString);
+      const connection = await amqp.connect(this.config.connectionString, this.config.socketOptions);
       const channel = await connection.createChannel();
 
       this.connections.push(connection);
